@@ -7,3 +7,6 @@ def index(request):
         'content': 'Главная страница'
     }
     return render(request, 'main/index.html', context)
+
+def about(request):
+    return render(request, 'About')
