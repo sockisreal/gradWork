@@ -6,7 +6,10 @@
 {% endblock %}
 
 {% block content %}
-    <h1 class="mt-5 pt-5 text-muted"><strong>{{ content }}</strong></h1>
+    <div class="mt-5 pt-4 text-muted bg-light custom-shadow rounded">
+        <h1 class="m-4"><strong>{{ content }}</strong></h1>
+        <p class="ms-5">{{ text_on_page }}</p>
+    </div>
 {% endblock %}
 
 {% block footer %}
