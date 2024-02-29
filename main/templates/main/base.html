@@ -90,13 +90,13 @@
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-body-tertiary" data-bs-theme="light">
-                        <li><a class="dropdown-item text-success" href="goods/catalog.html">Все товары</a></li>
-                        <li><a class="dropdown-item text-success" href="goods/catalog.html">Монобукеты</a></li>
-                        <li><a class="dropdown-item text-success" href="goods/catalog.html">Авторские букеты</a></li>
-                        <li><a class="dropdown-item text-success" href="goods/catalog.html">Цветы в коробке</a></li>
-                        <li><a class="dropdown-item text-success" href="goods/catalog.html">Цветы в корзине</a></li>
-                        <li><a class="dropdown-item text-success" href="goods/catalog.html">Цветы поштучно</a></li>
-                        <li><a class="dropdown-item text-success" href="goods/catalog.html">Цветы для интерьера</a></li>
+                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Все товары</a></li>
+                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Монобукеты</a></li>
+                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Авторские букеты</a></li>
+                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Цветы в коробке</a></li>
+                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Цветы в корзине</a></li>
+                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Цветы поштучно</a></li>
+                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Цветы для интерьера</a></li>
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->
