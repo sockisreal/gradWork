@@ -18,12 +18,7 @@ h1{
 }
 
 .custom-shadow {
-  box-shadow: 5px 5px 25px 19px #013B23;
-}
-
-.product_id {
-  color: gray;
-  font-size: 15px;
+  box-shadow: 5px 5px 25px 19px #013B23aa;
 }
 
 .badge.bg-warning.text-dark {

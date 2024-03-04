@@ -42,14 +42,14 @@
         {% for product in goods %}
             <!-- Карта товара -->
             <div class="col-lg-4 col-md-6 p-4">
-                <div class="card border-success rounded custom-shadow">
-                    <img src="{% static product.image %}" class="card-img-top" alt="...">
+                <div class="card h-100 border-success rounded custom-shadow">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
                     <div class="card-body">
                         <a href="../goods/product.html" class="link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover link-success">
-                            <p class="card-title">{{ product.name }}</p>
+                            <p class="card-title text-truncate">{{ product.name }}</p>
                         </a>
-                        <p class="card-text text-truncate">{{ product.description }}</p>
-                        <p class="product_id">id: 02265</p>
                         <div class="d-flex justify-content-between">
                             <p><strong>{{ product.price }}</strong></p>
                             <a href="#" class="btn add-to-cart">
@@ -81,9 +81,9 @@
 {% endblock %}
 
 {% block footer %}
-    <footer class="py-4 bg-dark">
+    <footer class="py-4 bg-success-subtle">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; Home Python Hub Studio 2023</p>
+            <p class="m-0 text-center text-success">Покшубина Софья, ВКБР 2024</p>
         </div>
     </footer>
 {% endblock %}
