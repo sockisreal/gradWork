@@ -44,7 +44,7 @@
                                     data-bs-toggle="dropdown" aria-expanded="false">
                                     Информация
                                 </a>
-                                <ul class="dropdown-menu bg-body-tertiary">
+                                <ul class="dropdown-menu">
                                     <li><a class="dropdown-item  text-success" href="#">Доставка и оплата</a></li>
                                     <li><a class="dropdown-item  text-success" href="#">Контактная информация</a></li>
                                     <li><a class="dropdown-item  text-success" href="{% url "main:about" %}">Про нас</a></li>
@@ -64,7 +64,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item text-success" href="carts/cart.html">Корзина</a></li>
                                     <li><a class="dropdown-item text-success" href="users/profile.html">Личный кабинет</a></li>
-                                    <li><a class="dropdown-item text-success" href="#">Админ панель</a></li>
+                                    <li><a class="dropdown-item text-success" href="{% url "admin:index" %}">Админ панель</a></li>
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
@@ -89,14 +89,10 @@
                         <img class="mx-1" src="{% static "deps/icons/grid-fill.svg" %}" alt="Catalog Icon" width="16"
                             height="16">
                     </button>
-                    <ul class="dropdown-menu bg-body-tertiary" data-bs-theme="light">
-                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Все товары</a></li>
-                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Монобукеты</a></li>
-                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Авторские букеты</a></li>
-                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Цветы в коробке</a></li>
-                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Цветы в корзине</a></li>
-                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Цветы поштучно</a></li>
-                        <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">Цветы для интерьера</a></li>
+                    <ul class="dropdown-menu" data-bs-theme="light">
+                        {% for category in categories %}
+                            <li><a class="dropdown-item text-success" href="{% url "catalog:index" %}">{{ category.name }}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->
