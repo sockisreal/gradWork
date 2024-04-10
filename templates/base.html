@@ -54,24 +54,29 @@
                             <li class="nav-item">
                                 <a class="nav-link text-success" href="carts/cart.html">Корзина</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-success" href="users/login.html">Войти</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle text-success" href="#" role="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Мой профиль
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item text-success" href="carts/cart.html">Корзина</a></li>
-                                    <li><a class="dropdown-item text-success" href="users/profile.html">Личный кабинет</a></li>
-                                    <li><a class="dropdown-item text-success" href="{% url "admin:index" %}">Админ панель</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item text-success" href="#">Выйти</a></li>
-                                </ul>
-                            </li>
+                            {% if not user.is_authenticated %}
+                                <li class="nav-item">
+                                    <a class="nav-link text-success" href="{% url "user:login" %}">Войти</a>
+                                </li>
+                            {% else %}
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-success" href="#" role="button"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Мой профиль
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item text-success" href="carts/cart.html">Корзина</a></li>
+                                        <li><a class="dropdown-item text-success" href="{% url "user:profile" %}">Личный кабинет</a></li>
+                                        {% if user.is_admin or user.is_staff %}
+                                            <li><a class="dropdown-item text-success" href="{% url "admin:index" %}">Админ панель</a></li>
+                                        {% endif %}
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item text-success" href="{% url "user:logout" %}">Выйти</a></li>
+                                    </ul>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </div>
@@ -179,6 +184,7 @@
                 </div>
                 <div class="col-lg-10">
                     <!-- Контент на странице -->
+                    {% include "includes/notifications.html" %}
                     {% block content %}{% endblock %}
                 </div>
             </div>
