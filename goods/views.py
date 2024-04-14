@@ -2,7 +2,9 @@ from django.core.paginator import Paginator
 from django.shortcuts import get_list_or_404, render
 from goods.models import Products
 from goods.utils import q_search
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def catalog(request, category_slug=None):
 
     page = request.GET.get('page', 1)
@@ -14,7 +16,7 @@ def catalog(request, category_slug=None):
     elif query:
         goods = q_search(query)
     else:
-        goods = get_list_or_404(Products.objects.filter(category__slug=category_slug))
+        goods = Products.objects.filter(category__slug=category_slug)
 
     if order_by and order_by != 'default':
         goods = goods.order_by(order_by)
@@ -28,6 +30,8 @@ def catalog(request, category_slug=None):
         'slug_url': category_slug
     }
     return render(request, 'goods/catalog.html', context)
+
+
 
 def product(request, product_slug):
     product = Products.objects.get(slug=product_slug)
