@@ -1,10 +1,20 @@
+html {
+  height: 100%;
+}
+
 body {
   background-image: url("../images/bg-image.jpg");
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center center;
   background-size: cover;
+  min-height: 100%;
+  position: relative;
+}
+
+section{
   height: 100%;
+  padding-bottom: 72px;
 }
 
 h1{
@@ -19,6 +29,10 @@ h1{
 
 .custom-shadow {
   box-shadow: 5px 5px 25px 19px #013B23aa;
+}
+
+.custom-shadow-pagination {
+  box-shadow: 5px 5px 15px 15px #013B23aa;
 }
 
 .badge.bg-warning.text-dark {
@@ -39,8 +53,7 @@ h1{
 }
 
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 10px 0;
 }
