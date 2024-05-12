@@ -68,6 +68,7 @@ def profile(request):
     }
     return render(request, 'users/profile.html', context)
 
+
 def users_cart(request):
     context = {
         'title': 'FlowerAI - Корзина'
