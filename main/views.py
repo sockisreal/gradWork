@@ -13,7 +13,6 @@ def index(request):
 def about(request):
     context = {
         'title': 'FlowerAI - О нас',
-        'content': 'О нас',
-        'text_on_page': 'Text'
+        'content': 'О нас'
     }
     return render(request, 'main/about.html', context)

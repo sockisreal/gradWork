@@ -9,40 +9,56 @@
 {% block content %}
     <div class="row list">
         <!-- Форма фильтров -->
-        <div class="dropdown mt-4 mb-2">
-            <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Сортировка
-            </button>
-            <form action="{% if request.GET.q %}{% url "catalog:search" %}{% else %}{% url "catalog:index" slug_url %}{% endif %}" method="get" class="dropdown-menu bg-light" data-bs-theme="light">
-                {% if request.GET.q %}
-                    <input type="hidden" name="q" value="{{ request.GET.q }}">
-                {% endif %}
-                <p class="text-success mx-3 mt-3">Сортировать:</p>
-                <div class="form-check text-success mx-3">
-                    <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default"
-                    {% if not request.GET.order_by or request.GET.order_by == 'default' %}checked{% endif %}>
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        По умолчанию
-                    </label>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 dropdown mt-4 mb-2">
+                    <button class="btn btn-success dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Сортировка
+                    </button>
+                    <form action="{% if request.GET.q %}{% url "catalog:search" %}{% else %}{% url "catalog:index" slug_url %}{% endif %}" method="get" class="dropdown-menu bg-light" data-bs-theme="light">
+                        {% if request.GET.q %}
+                            <input type="hidden" name="q" value="{{ request.GET.q }}">
+                        {% endif %}
+                        <p class="text-success mx-3 mt-3">Сортировать:</p>
+                        <div class="form-check text-success mx-3">
+                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default"
+                            {% if not request.GET.order_by or request.GET.order_by == 'default' %}checked{% endif %}>
+                            <label class="form-check-label" for="flexRadioDefault1">
+                                По умолчанию
+                            </label>
+                        </div>
+                        <div class="form-check text-success mx-3">
+                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price"
+                            {% if request.GET.order_by == 'price' %}checked{% endif %}>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                                По возрастанию цены
+                            </label>
+                        </div>
+                        <div class="form-check text-success mx-3">
+                            <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price"
+                            {% if request.GET.order_by == '-price' %}checked{% endif %}>
+                            <label class="form-check-label" for="flexRadioDefault3">
+                                По убыванию цены
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success mx-3 mt-3">Применить</button>
+                    </form>
                 </div>
-                <div class="form-check text-success mx-3">
-                    <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault2" value="price"
-                    {% if request.GET.order_by == 'price' %}checked{% endif %}>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        По возрастанию цены
-                    </label>
+                <div class="col-md-8 ms-auto">
+                    <form class="row">
+                        <div class="col">
+                            <input type="file" class="form-control mt-4" id="id_image"
+                                name="image"
+                                accept="image/*">
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-success mt-4">Найти похожий</button>
+                        </div>
+                    </form>
                 </div>
-                <div class="form-check text-success mx-3">
-                    <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault3" value="-price"
-                    {% if request.GET.order_by == '-price' %}checked{% endif %}>
-                    <label class="form-check-label" for="flexRadioDefault3">
-                        По убыванию цены
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-success mx-3 mt-3">Применить</button>
-            </form>
-        </div>
+            </div>
+            </div>
         {% for product in goods %}
             <!-- Карта товара -->
             <div class="col-lg-4 col-md-6 p-4">
