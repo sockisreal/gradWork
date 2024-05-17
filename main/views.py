@@ -16,3 +16,9 @@ def about(request):
         'content': 'О нас'
     }
     return render(request, 'main/about.html', context)
+
+def gen_photo(request):
+    context = {
+        'title': 'FlowerAI - Букет от ИИ'
+    }
+    return render(request, 'main/gen.html', context)
