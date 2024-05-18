@@ -11,7 +11,9 @@
 
 {% block content %}
     <h1 class="mt-5 pt-5 pb-4 text-muted"><strong>{{ content }}</strong></h1>
-    <a class="btn btn-success" href="{% url "main:gen_photo" %}">Хочу букет от нейросети!</a>
+    {% if user.is_authenticated %}
+        <a class="btn btn-success" href="{% url "main:gen_photo" %}">Хочу букет от нейросети!</a>
+    {% endif %}
 {% endblock %}
 
 {% block footer %}

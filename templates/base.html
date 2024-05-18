@@ -24,12 +24,14 @@
                 <div class="d-inline-flex">
                     <img class="mx-2" src="{% static "deps/images/logo.png" %}" alt="logo" width="55" height="40">
                     <a class="navbar-brand fw-bold text-success-emphasis" href="{% url "main:index" %}">FlowerAI</a>
-                    <div class="d-inline-flex">
-                        <form class="d-flex me-auto" role="search" action="{% url "catalog:search" %}" method="get">
-                            <input class="form-control me-2" type="search" name="q" placeholder="Поиск" aria-label="Search">
-                            <button class="btn btn-success text-white" type="submit">Поиск</button>
-                        </form>
-                    </div>
+                    {% if user.is_authenticated %}
+                        <div class="d-inline-flex">
+                            <form class="d-flex me-auto" role="search" action="{% url "catalog:search" %}" method="get">
+                                <input class="form-control me-2" type="search" name="q" placeholder="Поиск" aria-label="Search">
+                                <button class="btn btn-success text-white" type="submit">Поиск</button>
+                            </form>
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="d-inline-flex">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
