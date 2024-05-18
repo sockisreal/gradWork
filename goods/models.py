@@ -55,3 +55,6 @@ class Composition(models.Model):
         db_table = 'composition'
         verbose_name = 'Состав'
         verbose_name_plural = 'Составы'
+
+    def __str__(self):
+        return self.product.name
