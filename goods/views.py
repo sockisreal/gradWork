@@ -1,6 +1,6 @@
 from django.core.paginator import Paginator
 from django.shortcuts import get_list_or_404, render
-from goods.models import Products
+from goods.models import Composition, Products
 from goods.utils import q_search
 from django.contrib.auth.decorators import login_required
 
@@ -34,9 +34,12 @@ def catalog(request, category_slug=None):
 
 
 def product(request, product_slug):
+    
     product = Products.objects.get(slug=product_slug)
+    composition = Composition.objects.filter(product__slug=product_slug)
     context = {
         'title': 'FlowerAI - Товар',
-        'product': product
+        'product': product,
+        'composition': composition
     }
     return render(request, 'goods/product.html', context=context)
