@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from django.template import context
-
-from goods.models import Categories
+from django.http import JsonResponse
+import requests
+import json
 
 def index(request):
     context = {
@@ -22,3 +22,17 @@ def gen_photo(request):
         'title': 'FlowerAI - Букет от ИИ'
     }
     return render(request, 'main/gen.html', context)
+
+def generate_image(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        prompt = data.get('prompt')
+
+        # Отправка запроса на ваш сервис
+        response = requests.post('http://stabgen.desolator.net/generate', json={'prompt': prompt})
+        response_data = response.json()
+        image_data = response_data.get('image_data')
+
+        return JsonResponse({'image_data': image_data})
+
+    return JsonResponse({'error': 'Invalid request'}, status=400)

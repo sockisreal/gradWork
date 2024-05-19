@@ -3,6 +3,22 @@
 
 {% block css %}
 <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+<style>
+    .image-container {
+        background-color: #e0e0e0;
+        width: 100%;
+        height: 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto;
+        margin-top: 20px;
+    }
+    .generated-image {
+        max-width: 100%;
+        max-height: 100%;
+    }
+</style>
 {% endblock %}
 
 {% block modal_cart %}
@@ -10,15 +26,17 @@
 {% endblock modal_cart %}
 
 {% block content %}
-    <form class="row">
+    <form class="row" id="generate-form">
         <div class="col">
-            <textarea class="form-control ms-5 mt-4" id="exampleFormControlTextarea1" rows="3" placeholder="Введите описание букета..."></textarea>
+            <textarea class="form-control ms-5 mt-4" id="description" rows="3" placeholder="Введите описание букета..."></textarea>
         </div>
         <div class="col-3">
-            <a class="btn btn-success ms-5 mt-4" href="#">Сгенерировать букет</a>
+            <button type="button" class="btn btn-success ms-5 mt-4" onclick="generateBouquet()">Сгенерировать букет</button>
         </div>
     </form>
-    <img src="" class="mx-auto d-block mt-5" style="width: 500px;">
+    <div class="image-container">
+        <img id="generated-image" src="" class="generated-image">
+    </div>
 {% endblock %}
 
 {% block footer %}
@@ -27,4 +45,28 @@
             <p class="m-0 text-center text-success">Покшубина Софья, ВКБР 2024</p>
         </div>
     </footer>
+{% endblock %}
+
+{% block js %}
+<script>
+    let generatedImageData = '';
+
+    function generateBouquet() {
+        const description = document.getElementById('description').value;
+        fetch("{% url 'main:generate_image' %}", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            },
+            body: JSON.stringify({ 'prompt': description })
+        })
+        .then(response => response.json())
+        .then(data => {
+            generatedImageData = data.image_data;
+            document.getElementById('generated-image').src = 'data:image/png;base64,' + data.image_data;
+        })
+        .catch(error => console.error('Error:', error));
+    }
+</script>
 {% endblock %}
